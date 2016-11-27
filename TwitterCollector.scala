@@ -1,3 +1,4 @@
+package in.rishab.twitter
 import java.util.Date
 
 import org.apache.log4j.Logger
@@ -47,7 +48,7 @@ object TwitterCollector {
     TwitterUtils.configureTwitterCredentials() 
 
     // Create a local StreamingContext
-    val ssc = new StreamingContext("local[12]", "Twitter Downloader", Seconds(30))
+    val ssc = new StreamingContext("spark://192.168.0.40:7077", "Twitter Downloader", Seconds(30))
 
     // Enable meta-data cleaning in Spark (so this can run forever)
     System.setProperty("spark.cleaner.ttl", (outputBatchInterval * 5).toString)
@@ -138,6 +139,8 @@ object TwitterCollector {
 
     /** Start Spark streaming */
     ssc.checkpoint(checkpointDir)
+    println("Starting!")
     ssc.start()
+    println("Starting1!")
   }
 }

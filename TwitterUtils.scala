@@ -1,3 +1,4 @@
+package in.rishab.twitter
 import java.io.File
 
 import scala.io.Source
